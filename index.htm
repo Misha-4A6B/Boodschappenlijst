@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<style>
+		body {
+			background-color: #eee;
+		}
+	</style>
+</head>
+<body>
+	
+	<div>
+		<input type="text" id="inputProducts" value="a;b;c"/>
+		<button id="btnAdd">Add</button>
+	</div>
+	
+	<div>
+		<input type="text" id="inputDelProduct" value="b"/>
+		<button id="btnDel">Delete</button>
+	</div>
+	
+	<div id="list"></div>
+	
+	<script>
+		function id(e) { return document.getElementById(e); }
+		
+		var products = [];
+		
+		id("btnAdd").onclick = function() {
+			var inputProducts = id("inputProducts").value;
+			products = inputProducts.split(";");
+			
+			printProducts();
+		}
+		
+		id("btnDel").onclick = function() {
+			var toDel = id("inputDelProduct").value;
+			deleteProduct(toDel);
+			printProducts();
+		}
+		
+		function deleteProduct(name) {
+			for(var i = 0; i < products.length; i++) {
+				if(products[i].toLowerCase() == name.toLowerCase()) {
+					products.splice(i, 1);
+				}
+			}
+		}
+		
+		function printProducts() {
+			id("list").innerHTML = "";
+			for(var i = 0; i < products.length; i++) {
+				id("list").innerHTML += products[i] + "<br />";
+			}
+		}
+	</script>
+</body>
+</html>
