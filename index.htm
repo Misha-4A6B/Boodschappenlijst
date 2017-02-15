@@ -10,13 +10,19 @@
 <body>
 	
 	<div>
-		<input type="text" id="inputProducts" value="a;b;c"/>
+		<input type="text" id="inputProducts" value="milk;bread;egg"/>
 		<button id="btnAdd">Add</button>
 	</div>
 	
 	<div>
-		<input type="text" id="inputDelProduct" value="b"/>
+		<input type="text" id="inputDelProduct" value="egg"/>
 		<button id="btnDel">Delete</button>
+	</div>
+	
+	<div>
+		from: <input type="text" id="inputEditOld" value="milk"/>
+		to: <input type="text" id="inputEditNew" value="cola"/>
+		<button id="btnEdit">Edit</button>
 	</div>
 	
 	<div id="list"></div>
@@ -37,6 +43,22 @@
 			var toDel = id("inputDelProduct").value;
 			deleteProduct(toDel);
 			printProducts();
+		}
+		
+		id("btnEdit").onclick = function() {
+			var oldName = id("inputEditOld").value;
+			var newName = id("inputEditNew").value;
+			
+			editProduct(oldName, newName);
+			printProducts();
+		}
+		
+		function editProduct(oldName, newName) {
+			for(var i = 0; i < products.length; i++) {
+				if(products[i].toLowerCase() == oldName.toLowerCase()) {
+					products[i] = newName;
+				}
+			}
 		}
 		
 		function deleteProduct(name) {
